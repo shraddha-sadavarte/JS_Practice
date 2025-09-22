@@ -14,3 +14,18 @@ document.body.appendChild(div);
 div.innerHTML = "<p>I am paragraph tag</p>";
 div.style.fontFamily = "Arial";
 div.classList.add("div");
+
+//event listener
+let sel = document.querySelector("#select");
+let h3 = document.querySelector("#h3");
+
+sel.addEventListener("change", function(dets){
+   // console.log(dets.target.value);
+   h3.textContent = `${dets.target.value} option selected`;
+})
+
+let windowEvent = document.querySelector("#windowEvent");
+
+window.addEventListener("keydown", function(dets){
+    windowEvent.textContent = dets.key;
+})
