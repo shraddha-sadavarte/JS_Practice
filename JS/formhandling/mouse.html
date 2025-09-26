@@ -9,6 +9,13 @@
             width: 200px;
             height: 200px;
             background-color: burlywood;
+            position: absolute;
+            transition: all cubic-bezier(0.19, 1, 0.22, 1) 1s;
+        }
+
+        body{
+          overflow: hidden;
+          position: relative;
         }
     </style>
 </head>
@@ -17,14 +24,22 @@
     <div id="a">
 
     </div>
-      <script>   let q=document.querySelector('#a')
-    q.addEventListener('mouseover',function(){
-      q.style.backgroundColor='violet'
-    })
+      <script>   
+      let q=document.querySelector('#a')
+    // q.addEventListener('mouseover',function(){
+    //   q.style.backgroundColor='violet'
+    // })
 
-      q.addEventListener('mouseout',function(){
-      q.style.backgroundColor='burlywood'
-    })
+    //   q.addEventListener('mouseout',function(){
+    //   q.style.backgroundColor='burlywood'
+    // })
+
+      window.addEventListener("mousemove", function(dets){
+        q.style.top = dets.clientY+"px";
+        q.style.left = dets.clientX+"px";
+      })
+
+      //event bubbling :- jar tya element la event bhetlanhi tr to tychya parent la check karnar event aahe ka ny te . lets say <buton> vr event nasel aani button click kel tr button cha parent means div tyavr event bghnar
 </script>
 </body>
 </html>
