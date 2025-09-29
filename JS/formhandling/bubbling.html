@@ -44,6 +44,7 @@
         </div>
     </div>
     <script>
+        //event bubbling
         let a = document.querySelector(".a");
     let b = document.querySelector(".b");
     let c = document.querySelector(".c");
@@ -61,9 +62,20 @@
       console.log("b clicked");
     })
 
+    // a.addEventListener("click", function(){
+    //   console.log("a clicked");
+    // })
+
+    //capture phase on kr diya
     a.addEventListener("click", function(){
       console.log("a clicked");
-    })
+    }, true )
+    
+    //event capturing event bubbling ke ulta hota hai
+    //means agar ek eke andar ek tin div hain aur usme ek button hain aur agar hamne button click kiya
+    //to sabse pehle sabse bahar vale div ka listner on hoga aur phir uske andar ka div aur last mein button ka
+    //capture phase by default off hota hai...agar hame capture phase on karna hai to hum last vale div mein, 
+    // function ke curly brace ke bad comma karke true likh denge
     </script>
 </body>
 </html>
