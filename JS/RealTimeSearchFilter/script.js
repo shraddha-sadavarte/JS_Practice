@@ -66,11 +66,16 @@ showUsers(users);
 
 let a = document.querySelector('.search');
 a.addEventListener("input", function() {
-  const searchValue = a.value.toLowerCase().trim(); // convert to lowercase
-
+  const searchValue = a.value.toLowerCase().trim();
+  const container = document.querySelector(".container");
+   // convert to lowercase
   const newuser = users.filter((user) => {
     return user.name.toLowerCase().includes(searchValue); // compare lowercase versions
   });
-
-  showUsers(newuser);
+  if(newuser.length > 0){
+    showUsers(newuser);
+  }
+  else{
+    container.innerHTML = "<p class='no-user'>No User Found...</p>"
+  }
 });

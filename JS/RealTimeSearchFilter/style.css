@@ -99,3 +99,10 @@ body {
     align-items: center;
   }
 }
+
+.no-user {
+  color: #999;
+  font-size: 1.2em;
+  text-align: center;
+  padding: 20px;
+}
