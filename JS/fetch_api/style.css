@@ -1,0 +1,5 @@
+#user-card-container {
+    display: flex;
+    gap: 10px;      
+    flex-wrap: wrap; /* optional: moves to next row on small screens */
+}
