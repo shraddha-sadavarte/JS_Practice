@@ -1,0 +1,39 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,body{
+  height: 100%;
+  width: 100%;
+}
+
+.nav2{
+  gap: 30px;
+  display: flex;
+}
+
+.light{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: teal;
+  color: white;
+  padding: 15px 20px; 
+  color: black;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.dark{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: blueviolet;
+  color: white;
+  padding: 15px 20px; 
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
