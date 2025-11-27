@@ -1,9 +1,12 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem } from "../redux/slice";
 
 const Cart = () => {
 
-    const cartItems = useSelector((state) => state.cart.items);
+    const cartItems = useSelector((state) => state.cart.items); //it pulls cart items from the redux store
+    const dispatch = useDispatch();
 
+    //if items are present in the cart, display them else show empty cart message
     if (cartItems.length > 0) {
     return (
       <div className="p-6">
@@ -15,6 +18,9 @@ const Cart = () => {
                         <h3 className="text-lg font-medium">{item.name}</h3>
                         <p className="text-gray-700">₹{item.price}</p>
                     </div>
+                    <button className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
+                        onClick={() => dispatch(removeItem(item.id))}
+                    >Remove</button>
                 </li>
             ))}
         </ul>

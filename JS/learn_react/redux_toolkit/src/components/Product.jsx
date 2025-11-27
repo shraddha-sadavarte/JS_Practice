@@ -1,14 +1,14 @@
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/slice";
 
-const Product = (product) => {
+const Product = () => {
   const products = [
     { id: 1, name: "iPhone", price: 999 },
     { id: 2, name: "Headphones", price: 199 },
     { id: 3, name: "Smart Watch", price: 149 },
   ];
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); //to dispatch addItem action to the redux store
 
   return (
     <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
