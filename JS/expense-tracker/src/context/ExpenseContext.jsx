@@ -10,7 +10,7 @@ export const ExpenseProvider =({children})=>{
     });
 
     const addTransaction = (transaction) => {
-        setTransactions([...transactions, {...transaction, id: Date.now() + Math.random(),}]);
+        setTransactions([...transactions, {...transaction, id: Date.now() + Math.random(), date: new Date().toISOString()}]);
     }
 
     const deleteTransaction = (id) => {

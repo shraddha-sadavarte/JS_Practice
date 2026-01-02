@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ExpenseContext } from '../context/ExpenseContext'
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Bar } from 'recharts';
 
 const Dashboard = () => {
     const {transactions, deleteTransaction, updateTransaction} = useContext(ExpenseContext);
@@ -21,12 +22,51 @@ const Dashboard = () => {
     const [editAmount, setEditAmount] = useState(0);
     const [editedDescription, setEditedDescription] = useState('');
 
+    {/* prepare data for showing pie chart */}
+    // const pieChartData = [
+    //   { name: 'Income', value: totalIncome },
+    //   { name: 'Expenses', value: totalExpenses },
+    // ];
+    const categoryData = {};
+    transactions
+    .filter(t => t.type === 'expense')
+    .forEach(t => {
+      if(!categoryData[t.category]){
+        categoryData[t.category] = 0;
+      }
+      categoryData[t.category] += t.amount;
+    });
+
+    const pieChartData = Object.entries(categoryData).map(([key, value]) => ({
+      name: key,
+      value: value,
+    }));
+
+    const COLORS = ["#22c55e", "#3b82f6", "#f97316", "#ef4444", "#a855f7"];
+
+    {/* Bar chart to show monthly expenses */}
+    const monthlyExpenses = {};
+    transactions.forEach(t => {
+      const month = new Date(t.date).toLocaleString('default', {month:"short", year:"numeric"});
+      if(!monthlyExpenses[month]){
+        monthlyExpenses[month] = {month, income:0, expense:0};
+      }
+
+      if(t.type === 'income'){
+        monthlyExpenses[month].income += t.amount;
+      } else {
+        monthlyExpenses[month].expense += t.amount;
+      }
+    })
+
+    const barChartData = Object.values(monthlyExpenses);
+
   return (
     <div className="w-full h-full flex flex-col justify-between p-5">
         <h1 className="text-2xl font-bold mb-4">Expense Tracker</h1>
         <div className='flex flex-row justify-between items-center gap-3'>
             <div className="flex-1 bg-white rounded-lg shadow-md p-4 w-50">
-                <p>Total balance: ${totalBalance}</p>
+                <p>Current balance: ${totalBalance}</p>
             </div>
             <div className="flex-1 bg-white rounded-lg shadow-md p-4 w-50">
                 <p>Total Expenses: ${totalExpenses}</p>
@@ -112,6 +152,42 @@ const Dashboard = () => {
           </li>
         ))}
         </ul>
+        </div>
+
+        {/* PIE CHART */}
+        <div className='mt-6 bg-white p-4 rounded shadow flex flex-col items-center justify-center h-96'>
+          <h2 className='text-lg font-bold mb-4 text-center'>Expenses by Category</h2>
+          {pieChartData.length === 0 ? ( <p className='text-gray-500'>No expense data to display</p> ) : (
+            <div className='w-full h-72'>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={pieChartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius="60%" label={({name, value}) => `${name}: ${value}`} >
+                    {pieChartData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend verticalAlign='bottom'/>
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          )}
+          
+        </div>
+      
+
+        {/* BAR CHART */}
+        <div className='mt-6 bg-white p-4 rounded shadow'>
+          <h2 className='text-lg font-bold mb-4 text-center'>Monthly Income vs Expenses</h2>
+          <BarChart width={600} height={300} data={barChartData} >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="income" fill="#22c55e" />
+            <Bar dataKey="expense" fill="#ef4444" />
+          </BarChart>
         </div>
 
     </div>

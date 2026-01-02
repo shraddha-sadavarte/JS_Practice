@@ -11,6 +11,7 @@ const AddExpenseIncome = () => {
     const[type,setType] = useState('expense');
     const[amount,setAmount] = useState(0);
     const[description,setDescription] = useState('');
+    const[category,setCategory] = useState('Food');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,6 +19,7 @@ const AddExpenseIncome = () => {
         addTransaction({
             type,
             amount: Number(amount),
+            category,
             description,
         });
 
@@ -42,6 +44,17 @@ const AddExpenseIncome = () => {
                 Amount
             </label>
             <input type="number" id="amount" onChange={(e) => setAmount(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4">
+            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='category'>Category</label>
+            <select id='category' value={category} onChange={(e) => setCategory(e.target.value)} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'>
+                <option value="Food">Food</option>
+                <option value="Rent">Rent</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Travel">Travel</option>
+                <option value="Salary">Salary</option>
+                <option value="Other">Other</option>
+            </select>
         </div>
         <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
