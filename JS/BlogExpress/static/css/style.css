@@ -69,3 +69,32 @@ li a {
   background: #11456c;
   color: #fff;
 }
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  height: 150px;
+}
+
+input[type="submit"] {
+  background: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background: #11456c;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Blog</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+  <h1>Edit Blog</h1>
+
+  <form method="POST" action="/blog/edit/<%= blog._id %>">
+    <input type="text" name="title" value="<%= blog.title %>" required>
+    <br><br>
+    <textarea name="content" required><%= blog.content %></textarea>
+    <br><br>
+    <button class="btn">Update Blog</button>
+  </form>
+
+  <a class="btn" href="/blog">Cancel</a>
+</div>
+</body>
+</html>

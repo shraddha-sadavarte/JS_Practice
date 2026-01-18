@@ -9,12 +9,21 @@
   <div class="container">
     <h1>Blog Posts</h1>
 
+    <a class="btn" href="/blog/new">+ Add Blog</a>
+
     <ul>
       <% blogs.forEach(blog => { %>
         <li>
-          <a href="/blog/<%= blog._id %>">
-            <%= blog.title %>
-          </a>
+          <b><%= blog.title %></b><br>
+
+          <a href="/blog/<%= blog._id %>">View</a> |
+          <a href="/blog/edit/<%= blog._id %>">Edit</a> |
+
+          <form action="/blog/delete/<%= blog._id %>" method="POST" style="display:inline;">
+            <button style="background:none;border:none;color:red;cursor:pointer;font-weight:bold;font-size:18px;">
+              Delete
+            </button>
+          </form>
         </li>
       <% }) %>
     </ul>

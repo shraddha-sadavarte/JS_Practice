@@ -18,6 +18,9 @@ app.set('views', path.join(__dirname, 'views'));
 // static files
 app.use(express.static(path.join(__dirname, 'static')));
 
+//enable form data parsing
+app.use(express.urlencoded({ extended: true }));
+
 //routes
 app.use('/', require('./routes/blog'));
 
