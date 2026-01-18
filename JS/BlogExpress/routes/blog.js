@@ -1,23 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const blogs = require('../data/blogs');
+const Blog = require('../models/Blog');
 
+// Home
 router.get('/', (req, res) => {
   res.render('index');
 });
 
-router.get('/blog', (req, res) => {
+// Show all blogs
+router.get('/blog', async (req, res) => {
+  const blogs = await Blog.find();
   res.render('blog', { blogs });
 });
 
-router.get('/blog/:id', (req, res) => {
-  const blogId = parseInt(req.params.id);
-  const blogPost = blogs.find(b => b.id === blogId);
+// Single blog
+router.get('/blog/:id', async (req, res) => {
+  const blogPost = await Blog.findById(req.params.id);
 
   if (blogPost) {
     res.render('blogpost', { blogPost });
   } else {
-    res.status(404).send('Blog post not found');
+    res.status(404).send('Blog not found');
   }
 });
 
